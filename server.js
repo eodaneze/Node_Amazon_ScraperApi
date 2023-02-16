@@ -49,6 +49,19 @@ app.get("/product/:productid/offers", async(req, res) => {
          console.log(err);
      }
 })
+
+// implementing a search functionality
+app.get("/search/:searchQuery", async(req, res) => {
+     const{searchQuery} = req.params
+     try{
+          const response = await request(`${baseUrl}&url=https://www.amazon.com/s?k=${searchQuery}`);
+          res.json(JSON.parse(response));
+        //   the json.parse will make the result to be in json format
+     }
+     catch(err){
+         console.log(err);
+     }
+})
 app.listen(PORT, () => {
     console.log(`server is running on localhost: ${PORT}`);
 })
