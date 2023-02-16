@@ -23,6 +23,19 @@ app.get("/product/:productid", async(req, res) => {
          console.log(err);
      }
 })
+
+// get product reviews
+app.get("/product/:productid/reviews", async(req, res) => {
+     const{productid} = req.params
+     try{
+          const response = await request(`${baseUrl}&url=https://www.amazon.com/product-reviews/${productid}`);
+          res.json(JSON.parse(response));
+        //   the json.parse will make the result to be in json format
+     }
+     catch(err){
+         console.log(err);
+     }
+})
 app.listen(PORT, () => {
     console.log(`server is running on localhost: ${PORT}`);
 })
